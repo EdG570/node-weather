@@ -1,4 +1,3 @@
-const axios = require('axios');
 const yargs = require('yargs');
 
 const geocode = require('./geocode/geocode');
@@ -18,4 +17,12 @@ const argv = yargs
 
 const address = encodeURIComponent(argv.a);
 
-const geocodeAddress = geocode.geocodeAddress(address);
+const geocodeAddress = geocode.geocodeAddress(address, (errorMsg, results) => {
+  if(errorMsg) {
+    console.log(errorMsg);
+  } else {
+    console.log(`Address: ${results.address}`);
+    console.log(`Latitude: ${results.lat}`);
+    console.log(`Longitude: ${results.lng}`);
+  }
+});

@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const geocodeAddress = (address) => {
+const geocodeAddress = (address, callback) => {
   axios({
     method: 'get',
     url: `https://maps.googleapis.com/maps/api/geocode/json?address=${address}`,
@@ -8,18 +8,20 @@ const geocodeAddress = (address) => {
   })
     .then((response) => {
       if (response.data.status === 'ZERO_RESULTS') {
-        console.log('Unable to find that address');
+        callback('Unable to find that address');
         return;
       } else if (response.data.status === 'OK') {
-        console.log(`Address: ${response.data.results[0].formatted_address}`);
-        console.log(`Latitude: ${response.data.results[0].geometry.location.lat}`);
-        console.log(`Longitude: ${response.data.results[0].geometry.location.lng}`);
+        callback(undefined, {
+          address: response.data.results[0].formatted_address,
+          lat: response.data.results[0].geometry.location.lat,
+          lng: response.data.results[0].geometry.location.lng
+        });
       }
     })
     .catch((error) => {
-      console.log('Unable to connect to Google Servers');
+      callback('Unable to connect to Google Servers');
     });
-}
+};
 
 module.exports = {
   geocodeAddress
