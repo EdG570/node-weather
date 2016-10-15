@@ -22,12 +22,25 @@ const geocodeAddress = geocode.geocodeAddress(address, (errorMsg, results) => {
   if(errorMsg) {
     console.log(errorMsg);
   } else {
-    console.log(JSON.stringify(results, undefined, 2));
-    const weatherData = weather.fetchWeather(results.lat, results.lng, (errorMsg, results) => {
+    const lat = results.lat;
+    const lng = results.lng;
+
+    const weatherData = weather.fetchWeather(lat, lng, (errorMsg, results) => {
       if(errorMsg) {
         console.log(errorMsg);
       } else {
-        console.log(results.data.currently.summary);
+        const location = argv.a;
+        const summary = results.data.currently.summary;
+        const temp = Math.round(results.data.currently.temperature);
+        const humidity = results.data.currently.humidity;
+        const pop = results.data.currently.precipProbability;
+
+        console.log(results.data.currently);
+        console.log(`Current weather for ${location}:`);
+        console.log(` Summary: ${summary}`);
+        console.log(` Temp: ${temp} F`);
+        console.log(` Humidity: ${humidity}%`);
+        console.log(` Probability of precipitation: ${pop}%`);
       }
     });
   }

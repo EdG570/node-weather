@@ -16,6 +16,7 @@ const fetchWeather = (lat, lng, callback) => {
       }
     })
     .catch((error) => {
+      console.log('Error: ', error.message);
       callback('Unable to connect to weather servers');
     });
 };
