@@ -32,11 +32,11 @@ const geocodeAddress = geocode.geocodeAddress(address, (errorMsg, results) => {
         const location = argv.a;
         const summary = results.data.currently.summary;
         const temp = Math.round(results.data.currently.temperature);
-        const humidity = results.data.currently.humidity;
+        const humidity = results.data.currently.humidity * 100;
         const pop = results.data.currently.precipProbability;
 
         console.log(results.data.currently);
-        console.log(`Current weather for ${location}:`);
+        console.log(`Current weather conditions for ${location}:`);
         console.log(` Summary: ${summary}`);
         console.log(` Temp: ${temp} F`);
         console.log(` Humidity: ${humidity}%`);
