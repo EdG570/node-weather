@@ -1,0 +1,16 @@
+{
+  "name": "node-weather",
+  "version": "1.0.0",
+  "description": "A node CLI app for fetching weather",
+  "main": "index.js",
+  "dependencies": {
+    "axios": "^0.15.0",
+    "yargs": "^4.8.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ed Glazenski",
+  "license": "ISC"
+}
